@@ -1,14 +1,13 @@
 "use client"
 
 import { useState, useEffect } from "react";
-import { FiMic } from "react-icons/fi";  // Importing mic icon from react-icons
+import { FiMic } from "react-icons/fi"; 
 
 export default function Home() {
   const [searchText, setSearchText] = useState("");
   const [isListening, setIsListening] = useState(false);
   const [recognition, setRecognition] = useState(null);
 
-  // Setup Web Speech API for speech recognition
   const setupSpeechRecognition = () => {
     const SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -19,11 +18,10 @@ export default function Home() {
     }
 
     const recognitionInstance = new SpeechRecognition();
-    recognitionInstance.lang = "en-US"; // Set language to English
-    recognitionInstance.interimResults = true; // Show partial results while speaking
-    recognitionInstance.maxAlternatives = 1; // Limit alternatives to the best guess
+    recognitionInstance.lang = "en-US";
+    recognitionInstance.interimResults = true;
+    recognitionInstance.maxAlternatives = 1;
 
-    // Handle result event to set the text in the input field
     recognitionInstance.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
       setSearchText(transcript);
@@ -46,7 +44,7 @@ export default function Home() {
     }
 
     if (isListening) {
-      recognition.stop(); // Stop recording if it's already listening
+      recognition.stop();
     } else {
       recognition.start();
     }
@@ -89,15 +87,12 @@ export default function Home() {
   );
 }
 
-// Next.js API Route (in the same file for simplicity)
 export async function handler(req, res) {
   if (req.method === "POST") {
     const { voiceText } = req.body;
 
-    // Log the received voiceText (you can extend this to do more processing)
     console.log("Received voice text:", voiceText);
 
-    // Return a success response
     return res.status(200).json({ message: "Text received successfully", voiceText });
   } else {
     return res.status(405).json({ message: "Method Not Allowed" });
