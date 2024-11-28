@@ -12,7 +12,7 @@ app.use(express.json()) // Parse JSON request bodies
 // POST endpoint for receiving input from frontend and calling Gemini 1.5 Flash API
 app.post('/gemini-1.5-flash', async (req, res) => {
   const { input, timestamp } = req.body;
-const Prompt = "Give the entire program code only in javascript , strictly give only the code and no extra text  "
+const Prompt = "Provide the complete program code in JavaScript only. Return strictly the code without any additional text, comments, or explanations "
   if (!input || typeof input !== 'string') {
     return res.status(400).json({ error: 'Invalid input text' });
   }

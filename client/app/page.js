@@ -7,8 +7,9 @@ export default function Home() {
   const [searchText, setSearchText] = useState("");
   const [isListening, setIsListening] = useState(false);
   const [recognition, setRecognition] = useState(null);
-  const [aiResponse, setAiResponse] = useState("");
+  const [aiResponse, setAiResponse] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");  // To handle error messages
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -61,9 +62,9 @@ export default function Home() {
     };
 
     setLoading(true);
+    setError(""); // Reset previous errors
 
     try {
-      // Update the endpoint to match the backend route '/gemini-1.5-flash'
       const response = await fetch("http://localhost:5000/gemini-1.5-flash", {
         method: "POST",
         headers: {
@@ -75,47 +76,60 @@ export default function Home() {
       const data = await response.json();
 
       if (response.ok) {
-        setAiResponse(data.aiResponse); 
+        // Split the AI response into individual lines and store it as an array
+        setAiResponse(data.aiResponse.split("\n").map(line => line.trim()));
       } else {
-        setAiResponse("Error: Could not process your request.");
+        setError("Error: Could not process your request.");
       }
     } catch (error) {
-      setAiResponse("Error: Unable to reach the server.");
+      setError("Error: Unable to reach the server.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="flex items-center bg-white border rounded-full shadow-md p-2 w-96">
-        <input
-          type="text"
-          placeholder="Type or speak something"
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-          className="flex-grow px-4 py-2 text-gray-700 rounded-full focus:outline-none"
-        />
-        <button onClick={handleMicClick} className="text-gray-600 ml-2">
-          <FiMic size={24} className={isListening ? "text-green-500" : ""} />
-        </button>
-        <button onClick={handleSendClick} className="text-gray-600 ml-2">
-          <FiSend size={24} />
-        </button>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 py-6 px-4">
+      <div className="flex flex-col items-center w-full max-w-md bg-white border rounded-lg shadow-md p-6">
+        <div className="flex items-center w-full mb-4">
+          <input
+            type="text"
+            placeholder="Type or speak something"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            className="flex-grow px-4 py-2 text-gray-700 rounded-full focus:outline-none border border-gray-300"
+          />
+          <button onClick={handleMicClick} className="text-gray-600 ml-3">
+            <FiMic size={24} className={isListening ? "text-green-500" : "text-gray-600"} />
+          </button>
+          <button onClick={handleSendClick} className="text-gray-600 ml-3">
+            <FiSend size={24} />
+          </button>
+        </div>
+
+        {loading && (
+          <div className="mt-4 p-4 bg-blue-100 border border-blue-300 rounded-md shadow-md">
+            <p className="text-blue-600">Loading...</p>
+          </div>
+        )}
+
+        {error && (
+          <div className="mt-4 p-4 bg-red-100 border border-red-300 rounded-md shadow-md">
+            <p className="text-red-600">{error}</p>
+          </div>
+        )}
+
+        {aiResponse.length > 0 && !loading && (
+          <div className="mt-4 p-4 bg-white border rounded-md shadow-md w-full">
+            <h3 className="font-bold text-xl text-blue-500">AI Response:</h3>
+            <div className="text-gray-700">
+              {aiResponse.map((line, index) => (
+                <pre key={index} className="whitespace-pre-wrap break-words">{line}</pre>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
-
-      {loading && (
-        <div className="mt-4 p-4 bg-white border rounded-md shadow-md">
-          <p>Loading...</p>
-        </div>
-      )}
-
-      {aiResponse && (
-        <div className="mt-4 p-4 bg-white border rounded-md shadow-md">
-          <h3 className="font-bold text-xl text-blue-200">AI Response:</h3>
-          <pre className="text-gray-700">{JSON.stringify(aiResponse, null, 2)}</pre>
-        </div>
-      )}
     </div>
   );
 }
