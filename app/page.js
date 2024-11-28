@@ -63,7 +63,8 @@ export default function Home() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/gemini-1.5", {
+      // Update the endpoint to match the backend route '/gemini-1.5-flash'
+      const response = await fetch("http://localhost:5000/gemini-1.5-flash", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
