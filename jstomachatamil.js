@@ -3,28 +3,27 @@ function jsToMachaLangTamil(jsCode) {
       console.log("Starting reverse transpilation...");
   
       const jsToMachalangkeyword = [
-        { js: /else\s+if/g, macha: "lekunte" },
-        { js: /else/g, macha: "ledante" },
-        { js: /let/g, macha: "idi" },
-        { js: /const/g, macha: "undani" },
-        { js: /console\.log/g, macha: "macha.chappu" },
-        { js: /function/g, macha: "panni" },
-        { js: /return/g, macha: "evvu" },
-        { js: /if/g, macha: "okavella" },
-        { js: /for/g, macha: "ippativaraku" },
-        { js: /while/g, macha: "enthavariku" },
+        { js: /else\s+if/g, macha: "oruvela" },
+        { js: /else/g, macha: "illana" },
+        { js: /let/g, macha: "edhu" },
+        { js: /const/g, macha: "erukatum" },
+        { js: /console\.log/g, macha: "macha.sollu" },
+        { js: /function/g, macha: "vela" },
+        { js: /return/g, macha: "thirititha" },
+        { js: /if/g, macha: "enandre" },
+        { js: /for/g, macha: "idhuvarakum" },
+        { js: /while/g, macha: "yedhuvaraikum" },
         { js: /true/g, macha: "sari" },
         { js: /false/g, macha: "tappu" },
-        { js: /break/g, macha: "tunchu" },
-        { js: /continue/g, macha: "mundukivellu" },
+        { js: /break/g, macha: "kizhuchudu" },
+        { js: /continue/g, macha: "munnapo" },
         { js: /null/g, macha: "khali" },
-        { js: /undefined/g, macha: "amiladu" },
-        { js: /object/g, macha: "vastu" },
+        { js: /undefined/g, macha: "yedhumilla" },
+        { js: /object/g, macha: "torul" },
         { js: /array/g, macha: "gumpu" },
-        { js: /this/g, macha: "ide" },
-        { js: /new/g, macha: "hosa" },
+        { js: /this/g, macha: "kotha" },
+        { js: /new/g, macha: "pudhusu" },
       ];
-  
       const lines = jsCode.split("\n");
       const outputLines = [];
       for (let line of lines) {

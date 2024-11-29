@@ -21,7 +21,7 @@ function jsToMachaLangTelugu(jsCode) {
         { js: /undefined/g, macha: "amiladu" },
         { js: /object/g, macha: "vastu" },
         { js: /array/g, macha: "gumpu" },
-        { js: /this/g, macha: "ide" },
+        { js: /this/g, macha: "idhi" },
         { js: /new/g, macha: "hosa" },
       ];
   
