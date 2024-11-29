@@ -1,0 +1,7 @@
+idu a = sathya;
+macha.helu(a);
+yadi (a) {
+macha.helu('It's sathya!');
+} athava {
+macha.helu('It's sullu!');
+}

@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios'); 
-
+const {jstomacha} = require('./jstomacha')
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -41,8 +41,9 @@ async function processWithGemini(Prompt , input) {
         },
       });
  const aiResponse = response.data.candidates[0].content.parts[0].text;
+ const parsedText =  jstomacha(aiResponse) 
  console.log(aiResponse)
-      return aiResponse;
+      return parsedText;
     } catch (error) {
       console.error('Error in calling Gemini 1.5 Flash API:', error);
       console.error('Server Response:', error.response.data); 
