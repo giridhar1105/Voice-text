@@ -4,6 +4,7 @@ const cors = require('cors');
 const axios = require('axios'); 
 const {jsToMachaLangKannada} = require('./jstomacha')
 const {jsToMachaLangTelugu} = require('./jstomachatelugu')
+const {jsToMachaLangTelugu} = require('./jstomacha')
 const app = express();
 const port = process.env.PORT || 5000;
 
