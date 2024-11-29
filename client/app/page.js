@@ -65,7 +65,7 @@ export default function Home() {
     setError(""); // Reset previous errors
 
     try {
-      const response = await fetch("http://localhost:5000/macha_telugu", {
+      const response = await fetch("http://localhost:5000/macha_kannada", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
