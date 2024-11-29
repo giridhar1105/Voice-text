@@ -9,7 +9,7 @@ export default function Home() {
   const [recognition, setRecognition] = useState(null);
   const [aiResponse, setAiResponse] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");  // To handle error messages
+  const [error, setError] = useState(""); 
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -76,7 +76,6 @@ export default function Home() {
       const data = await response.json();
 
       if (response.ok) {
-        // Split the AI response into individual lines and store it as an array
         setAiResponse(data.aiResponse.split("\n").map(line => line.trim()));
       } else {
         setError("Error: Could not process your request.");
