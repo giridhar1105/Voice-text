@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios'); 
-const {jstomacha} = require('./jstomacha')
+const {jsToMachaLangKannada} = require('./jstomacha')
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -11,7 +11,7 @@ app.use(express.json())
 
 app.post('/gemini-1.5-flash', async (req, res) => {
   const { input, timestamp } = req.body;
-const Prompt = "Provide only the JavaScript code. Do not include any markdown or formatting tags. Only return the raw code. Ensure that the solution does not use any classes. Instead, use functions and procedural programming."
+const Prompt = "Provide the JavaScript code only, without any markdown, formatting tags, or comments. Use objects and procedural programming techniques exclusively. Strictly avoid using 'classes', 'function constructor' , 'var' keyword in the solution, make sure no where in the code 'this' keyword is used, if you cant return a code without satisfying the constraints mentioned above don't give the code. You have the ability to use JavaScript object. Return only the raw code."
 ;
   if (!input || typeof input !== 'string') {
     return res.status(400).json({ error: 'Invalid input text' });
@@ -41,7 +41,8 @@ async function processWithGemini(Prompt , input) {
         },
       });
  const aiResponse = response.data.candidates[0].content.parts[0].text;
- const parsedText =  jstomacha(aiResponse) 
+ const parsedText =  jsToMachaLangKannada(aiResponse) 
+ console.log(parsedText)
  console.log(aiResponse)
       return parsedText;
     } catch (error) {

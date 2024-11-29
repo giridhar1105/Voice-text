@@ -76,7 +76,7 @@ export default function Home() {
       const data = await response.json();
 
       if (response.ok) {
-        setAiResponse(data.aiResponse.split("\n").map(line => line.trim()));
+        setAiResponse(data.aiResponse);
       } else {
         setError("Error: Could not process your request.");
       }
@@ -122,9 +122,11 @@ export default function Home() {
           <div className="mt-4 p-4 bg-white border rounded-md shadow-md w-full">
             <h3 className="font-bold text-xl text-blue-500">AI Response:</h3>
             <div className="text-gray-700">
-              {aiResponse.map((line, index) => (
+              {/* {aiResponse.map((line, index) => (
                 <pre key={index} className="whitespace-pre-wrap break-words">{line}</pre>
-              ))}
+              ))} */}
+              <pre className="whitespace-pre-wrap break-words">{aiResponse
+                }</pre>
             </div>
           </div>
         )}
