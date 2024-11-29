@@ -58,14 +58,14 @@ export default function Home() {
 
     const requestData = {
       input: searchText,
-      timestamp: new Date().toISOString(),
+     
     };
 
     setLoading(true);
     setError(""); // Reset previous errors
 
     try {
-      const response = await fetch("http://localhost:5000/gemini-1.5-flash", {
+      const response = await fetch("http://localhost:5000/macha_telugu", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

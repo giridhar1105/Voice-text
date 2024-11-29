@@ -1,24 +1,24 @@
-function jsToMachaLangKannada(jsCode) {
+function jsToMachaLangTelugu(jsCode) {
     try {
       console.log("Starting reverse transpilation...");
   
       const jsToMachalangkeyword = [
-        { js: /else\s+if/g, macha: "illandre" },
-        { js: /else/g, macha: "illava" },
-        { js: /let/g, macha: "idu" },
-        { js: /const/g, macha: "irlli" },
-        { js: /console\.log/g, macha: "macha.helu" },
-        { js: /function/g, macha: "kelsa" },
-        { js: /return/g, macha: "kodu" },
-        { js: /if/g, macha: "enandre" },
-        { js: /for/g, macha: "allivargu" },
-        { js: /while/g, macha: "alliatanaka" },
+        { js: /else\s+if/g, macha: "lekunte" },
+        { js: /else/g, macha: "ledante" },
+        { js: /let/g, macha: "idi" },
+        { js: /const/g, macha: "undani" },
+        { js: /console\.log/g, macha: "macha.chappu" },
+        { js: /function/g, macha: "panni" },
+        { js: /return/g, macha: "evvu" },
+        { js: /if/g, macha: "okavella" },
+        { js: /for/g, macha: "ippativaraku" },
+        { js: /while/g, macha: "enthavariku" },
         { js: /true/g, macha: "sari" },
         { js: /false/g, macha: "tappu" },
-        { js: /break/g, macha: "muri" },
-        { js: /continue/g, macha: "mundehogu" },
+        { js: /break/g, macha: "tunchu" },
+        { js: /continue/g, macha: "mundukivellu" },
         { js: /null/g, macha: "khali" },
-        { js: /undefined/g, macha: "enuilla" },
+        { js: /undefined/g, macha: "amiladu" },
         { js: /object/g, macha: "vastu" },
         { js: /array/g, macha: "gumpu" },
         { js: /this/g, macha: "ide" },
@@ -33,7 +33,6 @@ function jsToMachaLangKannada(jsCode) {
           transformedLine = transformedLine.replace(js, macha);
         }
   
-        // Preserve comments
         if (line.includes("//")) {
           const commentIndex = line.indexOf("//");
           transformedLine = `${line.slice(0, commentIndex)} ${line.slice(commentIndex)}`;
@@ -42,7 +41,6 @@ function jsToMachaLangKannada(jsCode) {
         outputLines.push(transformedLine);
       }
   
-      // Ensure that braces are matched
       const openBraces = outputLines.filter((line) => line.includes("{")).length;
       const closeBraces = outputLines.filter((line) => line.includes("}")).length;
   
@@ -60,4 +58,4 @@ function jsToMachaLangKannada(jsCode) {
     }
   }
   
-  module.exports = { jsToMachaLangKannada };
+  module.exports = { jsToMachaLangTelugu};
