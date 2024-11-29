@@ -11,8 +11,7 @@ app.use(express.json())
 
 app.post('/gemini-1.5-flash', async (req, res) => {
   const { input, timestamp } = req.body;
-  const Prompt = "Provide only the JavaScript code. Do not include any markdown or formatting tags. Only return the raw code."
-
+const Prompt = "Provide only the JavaScript code. Do not include any markdown or formatting tags. Only return the raw code. Ensure that the solution does not use any classes. Instead, use functions and procedural programming."
 ;
   if (!input || typeof input !== 'string') {
     return res.status(400).json({ error: 'Invalid input text' });
